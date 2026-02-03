@@ -1,0 +1,54 @@
+[
+    {
+        "first_name": "Hank",
+        "middle_name": "Rutherford",
+        "last_name": "Hill",
+        "suffix": "",
+        "SSN": "123-45-6789",
+        "invest_account_num": "xxx-999123",
+        "bank_account_num": "xxxx12345",
+        "routing_num": "0974123",
+        "bank_name": "BNC",
+        "names_on_account": ["Hank R Hill", "Peggy J Hill"]
+        
+    },
+    {
+        "first_name": "William",
+        "middle_name": "Fontaine de la Tour",
+        "last_name": "Dauterive",
+        "suffix": "",
+        "SSN": "222-22-2222",
+        "invest_account_num": "xxx-789621",
+        "bank_account_num": "xxxx67890",
+        "routing_num": "xxx8420",
+        "bank_name": "Bonk of Amurica",
+        "names_on_account": ["William Fontaine de la Tour Dauterive"]
+        
+    },
+    {
+        "first_name": "Dale",
+        "middle_name": "",
+        "last_name": "Gribble",
+        "suffix": "",
+        "SSN": "555-55-5555",
+        "invest_account_num": "xxx-999321",
+        "bank_account_num": "xxxx67890",
+        "routing_num": "xxx4123",
+        "bank_name": "BNC",
+        "names_on_account": ["Dale Gribble"]
+        
+    },
+    {
+        "first_name": "Jeff",
+        "middle_name": "",
+        "last_name": "Boomhauer",
+        "suffix": "III",
+        "SSN": "333-33-3333",
+        "invest_account_num": "xxx-000896",
+        "bank_account_num": "xxxx5489",
+        "routing_num": "xxx9921",
+        "bank_name": "Walls Fergo",
+        "names_on_account": ["Jeff Boomhauer III"]
+        
+    }
+]
