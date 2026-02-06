@@ -1,8 +1,8 @@
 import argparse
 
-def get_customer_index():
+def get_customer_info():
     parser = argparse.ArgumentParser(description = "Fill a PDF using a chosen customer's data")
-    parser.add_argument("--customer", type = int, default = 0,
-                        help = "Index of customers.json (default = 0, only 4 customers in test version of json)"
+    parser.add_argument("--account", required = True, type = str, default = 0,
+                        help = "Customer account number"
     )
-    return parser.parse_args().customer
+    return parser.parse_args().account

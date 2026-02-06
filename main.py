@@ -1,31 +1,37 @@
-from pdfrw import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 import json
 import os
-from get_customer import get_customer_index
+from get_customer import get_customer_info
 #######################################################
 # ALL NAMES AND DATA ARE FAKE AND FOR DEMO PURPOSES ONLY!!!
 #####################################################
 
 
-
-blank_pdf = PdfReader("test_spi.pdf")
-
 def main():
     print("You have started pdf filler")
-# Uncomment this to check pdf field names
-#    for page in blank_pdf.pages:
-#        if page.Annots:
-#            for field in page.Annots:
-#              if field.V:
-#                 print(field.T, field.V, field.AS, field.AP)
+    blank_pdf = PdfReader("test_spi.pdf")
+    writer = PdfWriter()
+    writer.append(blank_pdf)
+
+#Finds field names and values for mapping
+    for page in blank_pdf.pages:
+        Annots = page.get("/Annots")
+        if not Annots:
+            continue
+        for Annot_ref in Annots:
+            field = Annot_ref.get_object()
+            name = field.get("/T", "Unnamed")
+            value = field.get("/V", "")
+            ftype = field.get("/FT", "")
+            print(f"{name:25} | value = {value:10} | type= {ftype}")
 
     with open('customers.json', 'r') as file:
         clients = json.load(file)
-    i = get_customer_index()
-    if i >= len(clients):
-        raise ValueError(f"Customer index {i} out of range")
+    account = get_customer_info()
+    if account not in clients:
+        raise ValueError(f"Account {account} not found")
 
-    client = clients[i]
+    client = clients[account]
     first = client.get("first_name")
     last = client.get("last_name")
     middle = client.get("middle_name")
@@ -49,32 +55,14 @@ def main():
     }
 
     
+    
+    for page in writer.pages:
+        writer.update_page_form_field_values(page, field_map)
+    with open(f"{first}_{last}_filled.pdf", "wb") as f:
+        writer.write(f)
 
+    os.system(f"xdg-open {first}_{last}_filled.pdf")
 
-
-
-
-    for page in blank_pdf.pages:
-        if page.Annots:
-            for field in page.Annots:
-                field_string = field.T[1:-1]
-
-
-                if field_string in field_map:
-                    field.V = field_map[field_string]
-                    field.AP = None
-
-            
-                
-
-       
-    filled_pdf = f"filled_{first}_{last}_spi.pdf"
-    blank_pdf.Root.NeedAppearances = True
-    PdfWriter().write(filled_pdf, blank_pdf)
-    print(f"Saved filled PDF as {filled_pdf}")
-
-    os.system(f"xdg-open {filled_pdf}")
-                    
 
 
 if __name__ == "__main__":
