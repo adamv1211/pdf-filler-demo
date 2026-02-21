@@ -1,12 +1,17 @@
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import NameObject, BooleanObject
+import subprocess
 import json
 import os
 from get_customer import get_customer_info
 import webbrowser
-#######################################################
-# ALL NAMES AND DATA ARE FAKE AND FOR DEMO PURPOSES ONLY!!!
-#####################################################
+from field_map import build_field_map
+from get_form_fields import get_fields
+from fill_pdf import fill
+
+#############################################################
+# ALL NAMES AND DATA ARE FAKE AND FOR DEMO PURPOSES ONLY!!! #
+#############################################################
 
 
 def main():
@@ -18,82 +23,39 @@ def main():
 #Finds PDF field names and values for mapping
     DEBUG = False
     if DEBUG:
-        for page in writer.pages:
-            Annots = page.get("/Annots")
-            if not Annots:
-                continue
-            for Annot_ref in Annots:
-                field = Annot_ref.get_object()
-                name = field.get("/T", "Unnamed")
-                value = field.get("/V", "")
-                ap = field.get("/AP", "")
-                ftype = field.get("/FT", "")
-                print(f"{name:25} | value = {value:10} | AP = {ap}| type= {ftype}")
-                if name == "Ibp":
-                    field.update({
-                        NameObject("/V"):  NameObject("/Yes"),
-                        NameObject("/AS"): NameObject("/Yes"),
-                    })
+        get_fields(writer)
+             
 
-    with open('customers.json', 'r') as file:
-        clients = json.load(file)
-    account, instructions = get_customer_info()
+    with open('customers.json', 'r') as cust_data:
+        clients = json.load(cust_data)
+    account, instructions, flatten = get_customer_info()
     if account not in clients:
         raise ValueError(f"Account {account} not found")
 
+    #Load specific client's data
     client = clients[account]
-    first = client.get("first_name")
-    last = client.get("last_name")
-    middle = client.get("middle_name")
-    suffix = client.get("suffix")
-    full_name = f"{first} {middle +  ' ' if middle else ''}{last} {suffix}"
-    mi = middle[0] if middle else ""
-    print(f"Filling pdf for {first} {mi} {last}")
+    field_map = build_field_map(client)
+    print(f"Filling pdf for {field_map["FirstName"]} {field_map["MI"]} {field_map["LastName"]}")
   
-
-    field_map = {
-        "FirstName": first,
-        "LastName": last,
-        "MiddleName": middle,
-        "MI": mi,
-        "SSN": client.get("SSN"),
-        "AccountNumber": client.get("invest_account_num"),
-        "BankAccountNumber": client.get("bank_account_num"),
-        "RoutingNumber": client.get("routing_num"),
-        "NameOfBank": client.get("bank_name"),
-        "NamesOnAccount": ", ".join(client.get("names_on_account", [])),
-        "FullName": full_name
-    }
-
+    #Fills pdf from field map
+    fill(writer, field_map, instructions)
     
-    for page in writer.pages:
-        writer.update_page_form_field_values(page, field_map)       
-        checkbox_options = ["Ibp", "1st party Etf", "Third party etf"]
-        Annots = page.get("/Annots")
-        if not Annots:
-            continue    
-        for Annot_ref in Annots:
-            field = Annot_ref.get_object()
-            name = field.get("/T", "Unnamed")
-            #Unchecks all checkboxes before generating a new form then checks the correct ones
-            if name in checkbox_options:
-                if name == instructions:
-                    field.update({NameObject("/V"): NameObject("/Yes"), NameObject("/AS"): NameObject("/Yes")})
-                else:
-                    field.update({NameObject("/V"): NameObject("/Off"), NameObject("/AS"): NameObject("/Off")})
- 
-
-    if "/AcroForm" in writer._root_object:
-        writer._root_object["/AcroForm"][NameObject("/NeedAppearances")] = BooleanObject(True)
-        
-
-    with open(f"{first}_{last}_filled.pdf", "wb") as f:
+    #Writes to pdf
+    with open(f"{field_map["FirstName"]}_{field_map["LastName"]}_filled.pdf", "wb") as f:
         writer.write(f)
         f.flush()
         os.fsync(f.fileno())
 
+
+    file_location = f"{field_map["FirstName"]}_{field_map["LastName"]}_filled.pdf"
+    #Flattening pdf
+    if flatten:
+        flat_path = f"{field_map["FirstName"]}_{field_map["LastName"]}_flattened.pdf"
+        subprocess.run(["gs", "-o", flat_path, "-sDEVICE=pdfwrite", "-dBATCH", "-dNOPAUSE", "-dSAFER", file_location], check = True)
+        file_location = flat_path
+
+
     #Opens Pdf after generation
-    file_location = f"{first}_{last}_filled.pdf"
     webbrowser.open(file_location)
     
 if __name__ == "__main__":
