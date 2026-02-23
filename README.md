@@ -1,24 +1,65 @@
 # PDF Filler Demo
 
-This is a small Python script that programmatically fills a PDF form with customer data.
-I used a demo "standing payment instructions" form as a test. 
-I may include other **demo** forms in the future.
-That was the purpose for including more data than was necessary in the field map to fill in the spi form.
+A small Python CLI tool that fills PDF form fields using customer data from a JSON file.
 
 ## Overview
-- Reads a template PDF (`test_spi.pdf`) with form fields.
-- Loads customer information from `customers.json`.
-- Fills in the PDF fields and generates a new file (`filled_{first}_{last}_spi.pdf`).
-- Also does checkboxes. See -- >get_customer.py .
-
-## Purpose
-This project is a **demo** to show Python scripting for backend/data automation tasks. It is **not production code**.
+- Reads a template PDF (selected via `--form`)
+- Loads customer records from `customers.json`
+- Builds a PDF field/value map and fills the PDF
+- Handles checkbox-style `/Btn` fields
+- Optional: flattens the final PDF using Ghostscript (`--flatten`)
+- Writes an output PDF named `{FirstName}_{LastName}_filled.pdf` (or `_flattened.pdf` when flattening is enabled)
 
 ## Important Note
-All names, account numbers, and other data in `customers.json` are **fake and for demonstration purposes only**.
+All names and data in `customers.json` are **fake and for demo purposes only**.
 
-## Usage
-Run the script with an optional customer account number and instruction type:
-Be careful with spelling for instructions. See --> get_customer_info
+## Requirements
+- Python 3.x
+- `pypdf`
+- Optional for `--flatten`: Ghostscript (`gs` must be available on your PATH)
+
+## Install
 ```bash
-python main.py --account 1234567890 --instructions "Ibp
+pip install pypdf
+```
+
+Usage
+
+Basic:
+
+python main.py --account 000000001
+
+Choose a form:
+
+python main.py --form test_spi.pdf --account 000000001
+
+SPI instructions:
+
+python main.py --form test_spi.pdf --account 000000001 --instructions ibp
+python main.py --form test_spi.pdf --account 000000001 --instructions 1Etf
+python main.py --form test_spi.pdf --account 000000001 --instructions 3Etf
+
+Periodic investment frequency + start date:
+
+python main.py --form test_pip.pdf --account 000000001 --frequency monthly --start_date 02/23/2026
+python main.py --form test_pip.pdf --account 000000001 --frequency yearly --start_date 02/23/2026
+
+Flatten output:
+
+python main.py --form test_spi.pdf --account 000000001 --flatten
+
+Valid values
+
+--instructions: ibp, 1Etf, 3Etf
+--frequency: monthly, yearly
+--start_date: mm/dd/yyyy (example: 02/23/2026)
+
+Logging
+
+Logs are written to:
+
+the console
+pdf_filler.log
+Notes
+For the full, up-to-date list of CLI options, see get_customer.py.
+Template-specific suppression logic (clearing certain fields based on selected options) lives in main.py.

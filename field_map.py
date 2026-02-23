@@ -1,4 +1,9 @@
-def build_field_map(client: dict) -> dict:
+from datetime import date
+from typing import Optional
+date_filled = date.today().strftime("%m/%d/%Y")
+
+
+def build_field_map(client: dict, start_date: Optional[str] = None) -> dict:
     first = client.get("first_name")
     last = client.get("last_name")
     middle = client.get("middle_name")
@@ -17,7 +22,9 @@ def build_field_map(client: dict) -> dict:
         "RoutingNumber": client.get("routing_num"),
         "NameOfBank": client.get("bank_name"),
         "NamesOnAccount": ", ".join(client.get("names_on_account", [])),
-        "FullName": full_name
+        "FullName": full_name,
+        "Date": date_filled,
+        "StartDate": start_date
     }
 
     return map 

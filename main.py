@@ -8,55 +8,89 @@ import webbrowser
 from field_map import build_field_map
 from get_form_fields import get_fields
 from fill_pdf import fill
+import logging
 
 #############################################################
 # ALL NAMES AND DATA ARE FAKE AND FOR DEMO PURPOSES ONLY!!! #
 #############################################################
 
 
+
+
 def main():
-    print("You have started pdf filler")
-    blank_pdf = PdfReader("test_spi.pdf")
+
+    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler(), logging.FileHandler("pdf_filler.log")])
+    log = logging.getLogger(__name__)
+
+
+    log.info("You have started pdf filler")
+    with open('customers.json', 'r') as cust_data:
+        clients = json.load(cust_data)
+        log.info("loaded %d customers", len(clients))
+    form, account, instructions, frequency, start_date, flatten = get_customer_info()
+    log.info("form=%s account=%s instructions=%s frequency=%s start_date=%s flatten=%s", form, account, instructions, frequency, start_date, flatten)
+    if account not in clients:
+        raise ValueError(f"Account {account} not found")
+    
+    blank_pdf = PdfReader(form)
     writer = PdfWriter()
     writer.append(blank_pdf)
 
 #Finds PDF field names and values for mapping
-    DEBUG = False
+    DEBUG = True
     if DEBUG:
         get_fields(writer)
              
 
-    with open('customers.json', 'r') as cust_data:
-        clients = json.load(cust_data)
-    account, instructions, flatten = get_customer_info()
-    if account not in clients:
-        raise ValueError(f"Account {account} not found")
+
 
     #Load specific client's data
     client = clients[account]
-    field_map = build_field_map(client)
-    print(f"Filling pdf for {field_map["FirstName"]} {field_map["MI"]} {field_map["LastName"]}")
-  
+    field_map = build_field_map(client, start_date)
+    file_location = f"{field_map['FirstName']}_{field_map['LastName']}_filled.pdf"
+    print(f"Filling pdf for {field_map['FirstName']} {field_map['MI']} {field_map['LastName']}")
+
+#   SUPRESSION
+    match form:
+        case "test_pip.pdf":
+            if instructions == "ibp"or instructions == "1Etf"or instructions == "3Etf":
+                field_map["BankAccountNumber"] = ""
+                field_map["RoutingNumber"] = ""
+                field_map["NameOfBank"] = ""
+                field_map["NamesOnAccount"] = ""
+        # case "additional form":                               <--- Additional forms may require supression
+        #     field_map[required_suppresed_field] = ""          <--- I used match to make adding pdf's simpler
+        #
+        #
+        case _:
+            pass
+    log.info("suppressed fields")
+
+
     #Fills pdf from field map
-    fill(writer, field_map, instructions)
+    log.info("filling output=%s", file_location)
+    fill(writer, field_map, instructions, frequency, DEBUG)
     
+
+
     #Writes to pdf
-    with open(f"{field_map["FirstName"]}_{field_map["LastName"]}_filled.pdf", "wb") as f:
+    with open(file_location, "wb") as f:
         writer.write(f)
         f.flush()
         os.fsync(f.fileno())
 
-
-    file_location = f"{field_map["FirstName"]}_{field_map["LastName"]}_filled.pdf"
     #Flattening pdf
     if flatten:
-        flat_path = f"{field_map["FirstName"]}_{field_map["LastName"]}_flattened.pdf"
+        flat_path = f"{field_map['FirstName']}_{field_map['LastName']}_flattened.pdf"
         subprocess.run(["gs", "-o", flat_path, "-sDEVICE=pdfwrite", "-dBATCH", "-dNOPAUSE", "-dSAFER", file_location], check = True)
-        file_location = flat_path
+        log.info("flattening via ghostscript")
+        os.replace(flat_path, file_location)
+        log.info("Flattening done, overwritten filled PDF with flattened version")
 
 
     #Opens Pdf after generation
     webbrowser.open(file_location)
+    log.info("done")
     
 if __name__ == "__main__":
     main()

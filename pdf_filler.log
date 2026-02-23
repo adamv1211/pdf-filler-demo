@@ -1,0 +1,163 @@
+INFO:__main__:You have started pdf filler
+INFO:__main__:You have started pdf filler
+INFO:__main__:You have started pdf filler
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=123456789 instructions=3Etf frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=123456789 instructions=None frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=3Etf frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_spi.pdf account=000000010 instructions=1Etf frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Nancy_Gribble_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_spi.pdf account=000000010 instructions=1Etf frequency=yearly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Nancy_Gribble_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000003 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Bobby_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
+INFO:__main__:You have started pdf filler
+INFO:__main__:loaded 15 customers
+INFO:__main__:form=test_pip.pdf account=000000001 instructions=None frequency=monthly start_date=12/23/2029 flatten=True
+INFO:__main__:suppressed fields
+INFO:__main__:filling output=Hank_Hill_filled.pdf
+INFO:__main__:flattening via ghostscript
+INFO:__main__:Flattening done, overwritten filled PDF with flattened version
+INFO:__main__:done
